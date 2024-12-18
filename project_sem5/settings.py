@@ -83,9 +83,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'RiceDB',
-        'USER': 'postgres',
-        'PASSWORD': 'nida1234',
-        'HOST': 'localhost'
+        'USER': 'ricedb_user',
+        'PASSWORD': 'SIbpJZMeSrNcRJgtzzVOC3ICCBIn4rca',
+        'HOST': 'dpg-cth40fjgbbvc73a1p5gg-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
