@@ -1,0 +1,64 @@
+{% extends "App/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Sales Mangement{% endblock title %}
+{% block header %}
+<div class="d-flex justify-content-between align-items-center">
+    <b>Sales Details</b>
+    <div>
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="{% url 'sales_list' %}" class="btn btn-outline-primary">
+            <i class="fas fa-stream"></i> Back to list
+        </a>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+<style>
+    /* Background styles */
+    body {
+        background: linear-gradient(to right, #e0f7fa, #5bacb7); /* Light blue gradient */
+        font-family: Arial, sans-serif; /* Font family */
+    }
+    b {
+        font-family: 'Gerogia', serif; /* Choose your font here */
+        font-size: 1.0cm; /* Adjust the size as needed */
+    }
+    form {
+        padding: 20px; /* Add padding around the form */
+        background-color: white; /* Optional: Add a background color to the form */
+        border-radius: 5px; /* Optional: Add rounded corners */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    }
+</style>
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    {{ form.name|as_crispy_field }}
+    {{ form.phone_number|as_crispy_field }}
+    {{ form.address|as_crispy_field }}
+    {{ form.date|as_crispy_field }}
+    {{ form.total_amount|as_crispy_field }}
+    <div class="row">
+        <div class="col-md-4">
+            {{ form.payment_terms|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{ form.payment_status|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{ form.remarks|as_crispy_field }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg">
+                <i class="fas fa-database"></i> Submit
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock content %}

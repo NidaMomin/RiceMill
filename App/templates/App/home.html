@@ -1,0 +1,133 @@
+{% extends "App/base.html" %}
+{% load static %}
+{% block title %}Rice Mill Management{% endblock title %}
+{% block header %}
+<div class="d-flex justify-content-between align-items-center header-container">
+    <b>Rice Mill Management</b>
+</div>
+{% endblock header %}
+
+{% block content %}
+<style>
+    /* General Styles */
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%; /* Ensure full height */
+        width: 100%;  /* Ensure full width */
+    }
+
+    
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f8f8;
+        color: #333;
+        display: flex;
+        flex-direction: column; /* Stack header, content, footer */
+        height: 100%;
+
+        background-image: url("{% static 'App/images/home.jpeg' %}");
+        background-size: cover; /* Ensures the image covers the entire area */
+        background-position: center; /* Centers the image */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+    }
+
+    /* Header */
+    .header-container {
+        color: white;
+        padding: 1em 2em;
+        display: flex;
+        justify-content: space-between; /* Space between items */
+        align-items: center;
+        position: absolute;
+        top: 52%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%; /* Ensures it spans full width */
+        box-sizing: border-box; /* Includes padding in the width calculation */
+    }
+
+    b {
+        font-family: 'Georgia', serif; /* Choose your font here */
+        font-size: 1.0cm; /* Adjust the size as needed */
+        text-align: center; /* Center the title */
+        flex-grow: 1; /* Allow title to take available space */
+        color: black;
+        font-weight: bold;
+        font-size: 70px;
+    }
+
+    /* Navigation */
+    .navigation {
+        background: linear-gradient(to right, #e0f7fa,#224267);
+        padding: 1.5em 0;
+        width: 100%; /* Ensures it spans full width */
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translate(-50%,-50%);   
+    }
+
+    .navigation ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        background-image: url("{% static 'App/images/logo.jpeg' %}");
+        background-size: 68px 35px; /* Ensures the image fits within the area */
+        background-position: 153px top; /* Positions the image at the top left */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+    }
+
+    .navigation li {
+        margin: 0 1em;
+        
+    }
+
+    .navigation a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        padding: 0.5em 1em;
+        font-size: larger;
+        font-family: 'Georgia', serif; /* Choose your font here */
+    }
+
+    .navigation a:hover {
+        background-color: #224267;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+
+    /* Footer */
+    footer {
+        color: black;
+        text-align: center;
+        padding: 0;
+        width: 100%; /* Ensures it spans full width */
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0%; /* Push footer to the bottom */
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+</style>
+
+
+
+<nav class="navigation">
+    <ul>
+        <li><a href="{% url 'employee_list' %}">Employee</a></li>
+        <li><a href="{% url 'sales_list' %}">Sales</a></li>
+        <li><a href="{% url 'raw_material_list' %}">Stock</a></li>
+        <li><a href="{% url 'machine_list' %}">Machinery</a></li>
+        <li><a href="{% url 'transaction_list' %}">Transaction</a></li>
+        <li><a href="{% url 'login' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</nav>
+
+<footer>
+    <p>&copy; 2024 Rice Mill Management System </p>
+</footer>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "App/base.html" %}
+
+{% block title %}Machine Management{% endblock title %}
+{% block header %}
+<div class="d-flex justify-content-between align-items-center">
+    <b>Machine List</b>
+    <div>
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="{% url 'machine_create' %}" class="btn btn-outline-primary">
+            <i class="fas fa-plus"></i> Add New
+        </a>
+    </div>
+</div>
+{% endblock header %}
+
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #e0f7fa, #5bacb7); /* Light blue gradient */
+        font-family: Arial, sans-serif; /* Font family */
+    }
+    b {
+        font-family: 'Gerogia', serif; /* Choose your font here */
+        font-size: 1.0cm; /* Adjust the size as needed */
+    }
+   
+</style>
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <th>Sl.No</th>
+            <th>Machine Name</th>
+            <th>Last Maintenance Date</th>
+            <th>Operational Status</th>
+            <th>Spare Parts Stock</th>
+            <th>Repair Cost</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for machine in machines %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ machine.machine_name }}</td>
+                <td>{{ machine.maintenance_date|date:"Y-m-d" }}</td>
+                <td>{{ machine.operational_status }}</td>
+                <td>{{ machine.spare_parts_stock }}</td>
+                <td>{{ machine.repair_cost }}</td>
+                <td>
+                    <div class="action-icons">
+                        <a href="{% url 'machine_update' machine.pk %}" class="btn text-secondary px-0" aria-label="Edit {{ machine.machine_name }}">
+                            <i class="far fa-edit fa-lg"></i>
+                        </a>
+                        <form action="{% url 'machine_delete' machine.pk %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn" aria-label="Delete {{ machine.machine_name }}">
+                                <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                    
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No machines available.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

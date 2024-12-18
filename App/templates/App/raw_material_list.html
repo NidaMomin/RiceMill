@@ -1,0 +1,64 @@
+{% extends "App/base.html" %}
+{% block title %}Stock Management{% endblock title %}
+{% block header %}
+<div class="d-flex justify-content-between align-items-center">
+    <b>Stock List</b>
+    <div>
+        
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="{% url 'raw_material_insert' %}" class="btn btn-outline-primary">
+            <i class="fas fa-plus"></i> Add New
+        </a>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #e0f7fa, #5bacb7); /* Light blue gradient */
+        font-family: Arial, sans-serif; /* Font family */
+    }
+    b {
+        font-family: 'Gerogia', serif; /* Choose your font here */
+        font-size: 1.0cm; /* Adjust the size as needed */
+    }
+   
+</style>
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <th>Material Name</th>
+            <th>Supplier Name</th>
+            <th>Unit of Measure</th>
+            <th>Cost per Unit</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for raw_material in raw_materials %}
+            <tr>
+                <td>{{ raw_material.material_name }}</td>
+                <td>{{ raw_material.supplier_name }}</td>
+                <td>{{ raw_material.unit_of_measure }}</td>
+                <td>{{ raw_material.cost_per_unit|floatformat:2 }}</td>
+                <td>
+                    <div class="action-icons">
+                        <a href="{% url 'raw_material_update' raw_material.material_id %}" class="btn text-secondary px-0">
+                            <i class="far fa-edit fa-lg"></i>
+                        </a>
+                        <form action="{% url 'raw_material_delete' raw_material.material_id %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">
+                                <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

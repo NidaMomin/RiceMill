@@ -1,0 +1,77 @@
+{% extends "App/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Machine Management{% endblock title %}
+{% block header %}
+<div class="d-flex justify-content-between align-items-center">
+    <b>Machine Details</b>
+    <div>
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">
+            <i class="fas fa-home"></i> Home
+        </a>
+            <a href="{% url 'machine_list' %}" class="btn btn-outline-primary">
+                <i class="fas fa-stream"></i> Back to list
+            </a>
+    </div>
+
+</div>
+{% endblock header %}
+
+{% block content %}
+<style>
+    /* Background styles */
+    body {
+        background: linear-gradient(to right, #e0f7fa, #5bacb7); /* Light blue gradient */
+        font-family: Arial, sans-serif; /* Font family */
+    }
+    b {
+        font-family: 'Gerogia', serif; /* Choose your font here */
+        font-size: 1.0cm; /* Adjust the size as needed */
+    }
+    form {
+        padding: 20px; /* Add padding around the form */
+        background-color: white; /* Optional: Add a background color to the form */
+        border-radius: 5px; /* Optional: Add rounded corners */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    }
+</style>
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    {{ form.machine_name|as_crispy_field }}
+    {{ form.maintenance_date|as_crispy_field }}
+    {{ form.operational_status|as_crispy_field }}
+    {{ form.spare_parts_stock|as_crispy_field }}
+    {{ form.repair_cost|as_crispy_field }}
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ form.machine_name|crispy }}
+        </div>
+        <div class="col-md-6">
+            {{ form.maintenance_date|crispy }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form.operational_status|crispy }}
+        </div>
+        <div class="col-md-6">
+            {{ form.spare_parts_stock|crispy }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form.repair_cost|crispy }}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg">
+                <i class="fas fa-database"></i> Submit
+            </button>
+        </div>
+       
+    </div>
+</form>
+{% endblock content %}
